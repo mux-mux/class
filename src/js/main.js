@@ -106,7 +106,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   //Class for Cards
 
-  class MenuCard {
+  class itemCard {
     constructor(src, alt, title, descr, price, parentSelector) {
       this.src = src;
       this.alt = alt;
@@ -114,17 +114,17 @@ window.addEventListener('DOMContentLoaded', () => {
       this.descr = descr;
       this.price = price;
       this.parent = document.querySelector(parentSelector);
-      this.transfer = 27;
-      this.changeToUAH();
+      this.course = 27;
+      this.convertUSDUAH();
     }
 
-    changeToUAH() {
-      this.price = this.price * this.transfer;
+    convertUSDUAH() {
+      this.price = this.price * this.course;
     }
 
     render() {
-      const element = document.createElement('div');
-      element.innerHTML = `
+      const div = document.createElement('div');
+      div.innerHTML = `
       <div class="menu__item">
         <img src="${this.src}" alt="${this.alt}">
         <h3 class="menu__item-subtitle">${this.title}</h3>
@@ -135,12 +135,12 @@ window.addEventListener('DOMContentLoaded', () => {
             <div class="menu__item-total"><span>${this.price}</span> грн/день</div>
         </div>
       </div>
-    `;
-      this.parent.append(element);
+      `;
+      this.parent.append(div);
     }
   }
 
-  new MenuCard(
+  new itemCard(
     'img/tabs/vegy.jpg',
     'vegy',
     'Меню "Фитнес"',
@@ -149,7 +149,7 @@ window.addEventListener('DOMContentLoaded', () => {
     '.menu .container'
   ).render();
 
-  new MenuCard(
+  new itemCard(
     'img/tabs/elite.jpg',
     'elite',
     'Меню “Премиум”',
@@ -158,12 +158,12 @@ window.addEventListener('DOMContentLoaded', () => {
     '.menu .container'
   ).render();
 
-  new MenuCard(
+  new itemCard(
     'img/tabs/post.jpg',
     'post',
     'Меню "Постное"',
     'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.',
-    21,
+    19,
     '.menu .container'
   ).render();
 });
