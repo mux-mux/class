@@ -107,11 +107,12 @@ window.addEventListener('DOMContentLoaded', () => {
   //Class for Cards
 
   class itemCard {
-    constructor(src, alt, title, descr, price, parentSelector) {
+    constructor(src, alt, title, descr, price, parentSelector, ...classes) {
       this.src = src;
       this.alt = alt;
       this.title = title;
       this.descr = descr;
+      this.classes = classes;
       this.price = price;
       this.parent = document.querySelector(parentSelector);
       this.course = 27;
@@ -124,8 +125,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
     render() {
       const div = document.createElement('div');
+      if (this.classes.length === 0) {
+        this.div = 'menu__item';
+        div.classList.add(this.div);
+      } else {
+        this.classes.forEach((className) => div.classList.add(className));
+      }
       div.innerHTML = `
-      <div class="menu__item">
         <img src="${this.src}" alt="${this.alt}">
         <h3 class="menu__item-subtitle">${this.title}</h3>
         <div class="menu__item-descr">${this.descr}</div>
@@ -134,7 +140,6 @@ window.addEventListener('DOMContentLoaded', () => {
             <div class="menu__item-cost">Цена:</div>
             <div class="menu__item-total"><span>${this.price}</span> грн/день</div>
         </div>
-      </div>
       `;
       this.parent.append(div);
     }
@@ -146,7 +151,9 @@ window.addEventListener('DOMContentLoaded', () => {
     'Меню "Фитнес"',
     'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
     9,
-    '.menu .container'
+    '.menu .container',
+    'menu__item',
+    'big'
   ).render();
 
   new itemCard(
@@ -164,6 +171,7 @@ window.addEventListener('DOMContentLoaded', () => {
     'Меню "Постное"',
     'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.',
     19,
-    '.menu .container'
+    '.menu .container',
+    'menu__item'
   ).render();
 });
